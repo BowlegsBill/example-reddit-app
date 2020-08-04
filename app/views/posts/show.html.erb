@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<div><%= @post.body %></div>
+<div>Created At: <%= @post.created_at %></div>
+
+<h3>Comments</h3>
+
+<% @post.comments.each do |comment| %>
+  <div style="margin-bottom: 20px">
+    <div>
+      <%= comment.body %>
+    </div>
+    <div>
+      <%= comment.created_at %>
+    </div>
+  </div>
+<% end %>
+
+<%= form_with(model: [@post, @post.comments.new], local: true) do |form| %>
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
